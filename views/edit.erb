@@ -1,0 +1,14 @@
+<% n = 0 %>
+
+<% @urls.each do |url| %>
+    <form name="edit_form" action="edit">
+    <input id=<%= n %> type="checkbox" name="course" value=<%= url.name %>><%= url.name %>
+    </form>
+    <form action="/delete" method="POST">
+       <input type="hidden" name="_method" value="DELETE">
+       <input type="submit" value="削除">
+    </form>
+   <% n = n+1 %>
+<% end %>
+
+<a href="/">戻る</a>

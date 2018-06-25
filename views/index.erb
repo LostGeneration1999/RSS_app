@@ -1,0 +1,30 @@
+<a href="new">ブックマーク登録</a>
+<a href="edit">ブックマーク編集</a>
+
+<% if @@current_user %>
+    <%= @@current_user.name %>様のブックマーク
+<% end %>
+
+<% if @@current_user %>
+    <a href="/log_out">log out</a>
+<% else %>
+    <a href="log_in">log in</a>
+<% end %>
+
+<% @parse_list.each do |rss| %>
+
+    <% begin %>
+   <ul>
+    <li>サイト先：<a href="<%= rss.channel.link %>"><%= rss.channel.title %></a></li>
+   </ul>
+   <ul>
+    <% rss.items.each do |entry| %>
+      <li><a href="<%= entry.link %>"><%= entry.title %></a></li>
+  <% end %>
+   </ul>
+  <% rescue %>
+    <ul>
+     <li>RSSが見つかりませんでした</li>
+    </ul>
+  <% end %>
+<% end %>
